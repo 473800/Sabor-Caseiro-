@@ -1,48 +1,120 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sabor Caseiro | PedeFácil Web</title>
+  <title>Sabor Caseiro – Atendimento Virtual</title>
   <style>
     body {
-      background: #fff7f0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px;
+      background-color: #f6f6f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    h1 {
-      color: #d35400;
-    }
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-    .btn {
-      background-color: #27ae60;
+    header {
+      background-color: #b22222;
       color: white;
-      padding: 14px 24px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 18px;
+      width: 100%;
+      text-align: center;
+      padding: 20px 0;
     }
-    .btn:hover {
-      background-color: #219150;
+    .chat-container {
+      background-color: white;
+      width: 90%;
+      max-width: 500px;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #ccc;
+    }
+    .message {
+      background-color: #e4e4e4;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .user {
+      background-color: #d1f1d1;
+    }
+    .bot {
+      background-color: #f1f1f1;
+    }
+    .cardapio-button {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+    .input-area {
+      display: flex;
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px 0 0 8px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <img src="https://i.imgur.com/qOn0tvn.png" alt="Logo Sabor Caseiro" width="200" />
-  <h1>Bem-vindo ao Sabor Caseiro 🍽️</h1>
-  <p>Atendimento automático via WhatsApp 🤖</p>
-  <p>Clique abaixo para ver o cardápio:</p>
-  <a class="btn" href="https://wa.me/5511912441222?text=Quero%20ver%20o%20card%C3%A1pio" target="_blank">
-    Ver Cardápio no WhatsApp
-  </a>
-  <p style="margin-top: 40px;">
-    🕒 <strong>Almoço:</strong> 10:30 às 14:45<br/>
-    🍔 <strong>Lanchonete:</strong> 18:45 às 23:45
-  </p>
+  <header>
+    <h2>Sabor Caseiro – Atendimento Virtual</h2>
+  </header>
+
+  <div class="chat-container" id="chat">
+    <div class="message bot">
+      👋 Olá! Seja bem-vindo ao <strong>Sabor Caseiro</strong>.<br />
+      Clique no link abaixo para ver nosso cardápio completo:
+      <br /><br />
+      <a class="cardapio-button" href="https://wa.me/5511912441222?text=Quero%20ver%20o%20cardápio" target="_blank">📲 Acessar Cardápio via WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Digite sua mensagem aqui..." />
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const userText = input.value.trim();
+      const chat = document.getElementById("chat");
+
+      if (userText === "") return;
+
+      chat.innerHTML += `<div class="message user">${userText}</div>`;
+
+      setTimeout(() => {
+        chat.innerHTML += `
+          <div class="message bot">
+            Obrigado pela sua mensagem! Para ver nosso cardápio, clique abaixo:<br><br>
+            <a class="cardapio-button" href="https://wa.me/5511912441222?text=Quero%20ver%20o%20cardápio" target="_blank">📲 Acessar Cardápio via WhatsApp</a>
+          </div>`;
+        chat.scrollTop = chat.scrollHeight;
+      }, 800);
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
 </body>
 </html>
+
